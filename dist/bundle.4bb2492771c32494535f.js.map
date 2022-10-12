@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.4bb2492771c32494535f.js","mappings":";;;;;AAAAA,OAAO,CAACC,GAAG,CAAC,kBAAkB,CAAC,C","sources":["webpack://car-insurance-online/./src/index.js"],"sourcesContent":["console.log(\"Hello from index\")"],"names":["console","log"],"sourceRoot":""}

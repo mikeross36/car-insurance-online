@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Insurance Online</title>
+<script defer src="bundle.4bb2492771c32494535f.js"></script></head>
+<body>
+    <div class="container">
+        <h1>Car Insurance Qute Online</h1>
+        <form data-quote-form>
+            <!-- errors -->
+            <div class="form-group">
+                <label for="model">Model: </label>
+                <select class="select-control" data-select-model>
+                    <option value="" disabled selected hidden>- select -</option>
+                    <option value="1">American</option>
+                    <option value="2">Asian</option>
+                    <option value="3">European</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="year">Year: </label>
+                <select class="select-control" data-select-year></select>
+            </div>
+            <fieldset class="form-group">
+                <legend>Level</legend>
+                <div class="radio-btns">
+                    <div class="form-check">
+                        <label>
+                            <input 
+                            type="radio"
+                            name="level"
+                            value="basic"
+                            checked>
+                            Basic
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input 
+                            type="radio"
+                            name="level"
+                            value="complete"
+                            >
+                            Complete
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <!--  -->
+            <div class="spinner">
+                <img src="08de38b6a1e6e4bb6aac.gif" alt="spinner">
+            </div>
+            <!--  -->
+            <div class="result"></div>
+            <!--  -->
+            <div class="form-group">
+                <button class="submit-btn" type="submit">get quote</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
