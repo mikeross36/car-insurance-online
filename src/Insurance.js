@@ -1,5 +1,5 @@
-"use strict";
-import { UIController } from "./UIController";
+"use strict"
+import {UiController} from "./uiController"
 
 export class Insurance {
     constructor(model, year, level) {
@@ -7,10 +7,11 @@ export class Insurance {
         this.year = year;
         this.level = level;
     }
-
+    
     calculatePrice() {
         let price;
         const basePrice = 2000;
+        // based on model price calculation
         switch (this.model) {
             case "1":
                 price = basePrice * 1.15;
@@ -21,27 +22,28 @@ export class Insurance {
             case "3":
                 price = basePrice * 1.3;
                 break;
-            default: UIController.displayError("Model based price error!");
-        }
-        const diffYear = getYearDifference(this.year);
-        price -= ((diffYear * 3) - price) / 100;
-        price = calculateLevel(this.level, price);
-
-        function getYearDifference(year) {
-            const difference = new Date().getFullYear() - year;
-            return difference;
+            default: UiController.displayError("Model based price error!")
         };
 
-        function calculateLevel(level, price) {
-            if (level === "basic") {
+        // based on car age price caculation
+        const getYearDifference = () => {
+            return new Date().getFullYear() - this.year;
+        };
+        const diffYear = getYearDifference()
+        price -= ((diffYear * 3) - price) / 100;
+
+        // based on insurance level price caculation
+        const calculateLevel = price => {
+            if (this.level === "basic") {
                 price *= 1.3;
             }
-            else {
-                price *= 1.5;
-            }
-            return +price.toFixed(2);
+            price *= 1.5;
+
+            return +price.toFixed(2)
         };
+        
+        price = calculateLevel(price);
 
         return price;
-    }
-}
+    };
+};

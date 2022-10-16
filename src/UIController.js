@@ -1,51 +1,51 @@
-"use strict";
-import { qs } from "./utils.js";
-import spinnerGif from "./assets/images/spinner.gif";
-import { form } from "./index";
+"use strict"
+import { qs } from "./utils";
+import { globals } from "./globals"
+const form = globals();
+import spinnerGif from "./assets/images/spinner.gif"
 
-export class UIController {
+export class UiController { 
     static displayYears() {
-        const presentYear = new Date().getFullYear();
+        const presentYear = new Date().getFullYear()
         const maxYear = presentYear - 20;
-        const yearSelect = qs("[data-select-year]");
-        createOptions();
-
-        function createOptions() {
-            for (let i = presentYear; i >= maxYear; i--) {
-                const option = document.createElement("option");
+        const yearSelect = qs("[data-select-year]")
+        
+        const createOptions = () => {
+            for (let i = presentYear; i >= maxYear; i--){
+                const option = document.createElement("option")
                 option.value = i;
                 option.textContent = i;
-                yearSelect.append(option);
+                yearSelect.append(option)
             }
         }
-    }
+        createOptions()
+    };
 
     static displayError(message) {
-        createErrDiv();
-
-        function createErrDiv() {
-            const div = document.createElement("div");
-            div.classList.add("error");
+        const createErrorDiv = () => {
+            const div = document.createElement("div")
+            div.classList.add("error")
             div.innerHTML = `<p>${message}</p>`;
             const formGroup = qs(".form-group");
-            form.insertBefore(div, formGroup);
+            form.insertBefore(div, formGroup)
         };
-
-        function removeErrDiv() {
+        
+        const removeErrDiv = () => {
             const timer = setTimeout(() => {
                 qs(".error").remove();
-            }, 2000);
+            }, 2000)
             return () => {
-                clearTimeout(timer);
-            };
+                clearTimeout(timer)
+            }
         };
-        return removeErrDiv();
-    }
+
+        createErrorDiv()
+        removeErrDiv()
+    };
 
     static displayResult(insurance, price) {
-        let model = defineModel();
-
-        function defineModel() {
+        // define model name
+        const defineModel = () => {
             let model = insurance.model;
             switch (model) {
                 case "1":
@@ -57,47 +57,50 @@ export class UIController {
                 case "3":
                     model = "European";
                     break;
-                default: UIController.displayError("Cannot get model name");
+                default: UiController.displayError("Cannot get model name!")
             }
             return model;
-        }
+        };
 
-        function displaySummaryDiv() {
-            const div = document.createElement("div");
+        const displaySummaryDiv = () => {
+            const modelName = defineModel()
+            const div = document.createElement("div")
             if (div) {
                 div.innerHTML = `
-                    <p class="header">Summary</p>
-                    <p>Model: ${model}</p>
-                    <p>Year: ${insurance.year}<p/>
+                    <p class="header">Summary</div>
+                    <p>Model: ${modelName}</p>
+                    <p>Year: ${insurance.year}</p>
                     <p>Level: ${insurance.level}</p>
                     <p>Total: ${price}</p>
-                `;
+                `
             }
             return div;
         };
 
-        function displaySpinner() {
-            const spinner = getSpinner();
-            const div = displaySummaryDiv();
-            const result = qs(".result");
+        const displaySpinner = () => {
+            const getSpinner = () => {
+                const spinnerContainer = qs(".spinner")
+                const spinnerImg = document.createElement("img")
+                spinnerImg.src = spinnerGif;
+                spinnerImg.style.display = "block";
+
+                return spinnerContainer.appendChild(spinnerImg)
+            };
+
+            const spinner = getSpinner()
+            const div = displaySummaryDiv()
+            const result = qs(".result")
 
             const timer = setTimeout(() => {
                 spinner.style.display = "none";
-                result.append(div);
-            }, 2000);
+                result.append(div)
+            },2000)
             return () => {
-                clearTimeout(timer);
-            };
-        }
-        return displaySpinner();
+                clearTimeout(timer)
+            }
+        };
 
-        function getSpinner() {
-            const spinnerCont = qs(".spinner");
-            const spinnerImg = document.createElement("img");
-            spinnerImg.src = spinnerGif;
-            spinnerImg.style.display = "block";
-            return spinnerCont.appendChild(spinnerImg);
-        }
-    }
-}
-;
+        displaySpinner()
+    };
+};
+ 

@@ -2,6 +2,5 @@
 import { qs } from "./utils.js"
 
 export function globals() {
-    const form = qs("[data-quote-form]")
-    return form;
+    return qs("[data-quote-form]")
 };
